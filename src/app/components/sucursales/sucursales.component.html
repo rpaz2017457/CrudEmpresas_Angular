@@ -1,0 +1,241 @@
+<div class="container">
+  <button
+    class="btn btn-danger"
+    type="button"
+    data-bs-toggle="modal"
+    data-bs-target="#modalAgregarProducto"
+  >
+    Agregar Sucursal
+  </button>
+  <br />
+  <br />
+  <div class="row">
+    <div class="col-12 col-md-4" *ngFor="let sucu of sucursalModelGet">
+      <div class="card text-center mb-3">
+        <div class="card-header">
+          {{ sucu._id }}
+        </div>
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/610/610365.png"
+          class="hola"
+          width="200px"
+          height="200px"
+          alt="Sucursales de Empresa"
+        />
+        <div class="card-body">
+          <h5 class="card-title">{{ sucu.nombreSucursal }}</h5>
+
+          <p class="card-text">Dirección: {{ sucu.direccionSucursal }}</p>
+          <p class="card-text">Municipio: {{ sucu.municipio }}</p>
+          <button
+            type="button"
+            class="btn btn-danger"
+            (click)="deleteSucursales(sucu._id)"
+          >
+            Eliminar
+          </button>
+          <button
+            class="btno btn"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasExample"
+            aria-controls="offcanvasExample"
+            (click)="getSucursalId(sucu._id)"
+          >
+            Editar
+          </button>
+          <button
+            type="button"
+            class="btn btn-danger"
+            [routerLink]="['/verSucursales', sucu._id]"
+          >
+            Ver
+          </button>
+          <button
+            type="button"
+            class="btno btn"
+            routerLink="/productos-sucursales"
+          >
+            Productos
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="modalAgregarProducto"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Agregar Sucursal</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="inputNombreSucursal" class="form-label"
+              >Nombre Sucursal</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="inputNombreSucursal"
+              name="nombreSucursal"
+              #nombreSucursal="ngModel"
+              [(ngModel)]="sucursalModelPost.nombreSucursal"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="inputDireccionSucursal" class="form-label"
+              >Dirección Sucursal</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="inputDireccionSucursal"
+              name="direccionSucursal"
+              #direccionSucursal="ngModel"
+              [(ngModel)]="sucursalModelPost.direccionSucursal"
+            />
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="form3Example3c">Municipio</label>
+            <select
+              class="form-select"
+              aria-label="Default select example"
+              id="form3Example3c"
+              id="inputMunicipio"
+              name="municipio"
+              #municipio="ngModel"
+              [(ngModel)]="sucursalModelPost.municipio"
+              required
+            >
+              <option value="Amatitlán">Amatitlán</option>
+              <option value="Chinautla">Chinautla</option>
+              <option value="Chuarrancho">Chuarrancho</option>
+              <option value="Ciudad de Guatemala">Ciudad de Guatemala</option>
+              <option value="Fraijanes">Fraijanes</option>
+              <option value="Mixco">Mixco</option>
+              <option value="Palencia">Palencia</option>
+              <option value="San José del Golfo">San José del Golfo</option>
+              <option value="San José Pinula">San José Pinula</option>
+              <option value="San Juan Sacatepéquez">
+                San Juan Sacatepéquez
+              </option>
+              <option value="San Miguel Petapa">San Miguel Petapa</option>
+              <option value="San Pedro Ayampuc">San Pedro Ayampuc</option>
+              <option value="San Pedro Sacatepéquez">
+                San Pedro Sacatepéquez
+              </option>
+              <option value="San Raymundo">San Raymundo</option>
+              <option value="Santa Catarina Pinula">
+                Santa Catarina Pinula
+              </option>
+              <option value="Villa Canales">Villa Canales</option>
+              <option value="Villa Nueva">Villa Nueva</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-dismiss="modal"
+          (click)="postSucursales()"
+        >
+          Agregar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="offcanvas offcanvas-start"
+  tabindex="-1"
+  id="offcanvasExample"
+  aria-labelledby="offcanvasExampleLabel"
+>
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Editar Sucursal</h5>
+    <button
+      type="button"
+      class="btn-close text-reset"
+      data-bs-dismiss="offcanvas"
+      aria-label="Close"
+    ></button>
+  </div>
+  <div class="offcanvas-body">
+    <form>
+      <div class="mb-3">
+        <label for="inputNombreSucursal" class="form-label"
+          >Nombre Sucursal</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="inputNombreSucursal"
+          name="nombreSucursal"
+          #nombreSucursal="ngModel"
+          [(ngModel)]="sucursalModelGetId.nombreSucursal"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="inputDireccionSucursal" class="form-label"
+          >Dirección Sucursal</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="inputDireccionSucursal"
+          name="direccionSucursal"
+          #direccionSucursal="ngModel"
+          [(ngModel)]="sucursalModelGetId.direccionSucursal"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="inputMunicipio" class="form-label">Municipio</label>
+        <input
+          type="text"
+          class="form-control"
+          id="inputMunicipio"
+          name="municipio"
+          #municipio="ngModel"
+          [(ngModel)]="sucursalModelGetId.municipio"
+        />
+      </div>
+      <button
+        type="button"
+        class="btn btn-success"
+        (click)="putSucursales()"
+        data-bs-dismiss="offcanvas"
+      >
+        Editar Sucursal
+      </button>
+    </form>
+  </div>
+</div>
+
+<div
+  class="footer d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-8 px-5 px-xl-5 bg-danger"
+>
+  <div class="asado text-white mb-3 mb-md-0">
+    Copyright © 2022. Todos los Derechos Reservados por el Grupo 1.
+  </div>
+</div>

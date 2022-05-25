@@ -1,0 +1,161 @@
+<div class="container">
+  <br>
+  <div class="input-group mb-3">
+    <input [(ngModel)]="search" name="search" type="text" class="form-control" placeholder="Buscar Producto"
+      aria-label="Recipient's username" aria-describedby="basic-addon2">
+    <span class="input-group-text" id="basic-addon2">Buscar</span>
+  </div>
+
+  <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#modalAgregarProducto">
+    Agregar Producto
+  </button>
+  <br>
+  <hr>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID Producto</th>
+        <th scope="col">Nombre Producto</th>
+        <th scope="col">Nombre Proveedor</th>
+        <th scope="col">Stock</th>
+        <th scope="col">Editar</th>
+        <th scope="col">Eliminar</th>
+        <th scope="col">Enviar a sucursal</th>
+
+      </tr>
+    </thead>
+    <tbody *ngFor="let prod of productoModelGet | search:search">
+
+      <th scope="row">{{ prod._id }}</th>
+      <td>{{prod.nombreProducto}}</td>
+      <td>{{prod.nombreProveedor}}</td>
+      <td>{{prod.stock}}</td>
+      <td> <button class="btn " type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample"
+          aria-controls="offcanvasExample" (click)="getProductosId(prod._id)">
+          <img src="https://cdn-icons-png.flaticon.com/512/2921/2921087.png" width="50px" height="50px" class="imagen"
+            alt="..."></button></td>
+      <td> <button class="btn" type="button" (click)="deleteProductos(prod._id)"><img
+            src="https://cdn-icons-png.flaticon.com/512/1214/1214594.png" width="50px" height="50px" class="imagen"
+            alt="..."></button></td>
+      <td> <img src="https://cdn-icons-png.flaticon.com/512/726/726526.png" type="button" data-bs-toggle="modal"
+          data-bs-target="#modalAgregarProductoSucursal" width="70px" height="70px" class="imagen" alt="..."
+          (click)="getProductosId(prod._id)"></td>
+    </tbody>
+  </table>
+</div>
+
+<div class="modal fade" id="modalAgregarProducto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Agregar Producto</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="inputNombreProducto" class="form-label">Nombre Producto</label>
+            <input type="text" class="form-control" id="inputNombreProducto" name="nombreProducto"
+              #nombreProducto="ngModel" [(ngModel)]="productoModelPost.nombreProducto">
+          </div>
+          <div class="mb-3">
+            <label for="inputNombreProveedor" class="form-label">Nombre Proveedor</label>
+            <input type="text" class="form-control" id="inputNombreProveedor" name="nombreProveedor"
+              #nombreProveedor="ngModel" [(ngModel)]="productoModelPost.nombreProveedor">
+          </div>
+          <div class="mb-3">
+            <label for="inputStock" class="form-label">Stock</label>
+            <input type="number" class="form-control" id="inputStock" name="stock" #stock="ngModel"
+              [(ngModel)]="productoModelPost.stock">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="postProductos()">Agregar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalAgregarProductoSucursal" tabindex="-1" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Enviar Producto a Sucursal</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="inputNombreProducto2" class="form-label">Nombre Producto</label>
+            <input type="text" class="form-control" id="inputNombreProducto2" name="nombreProducto2"
+              #nombreProducto2="ngModel" [(ngModel)]="productoSucursalModelPost.nombreProducto">
+          </div>
+
+          <div class="mb-3">
+            <label for="inputStockSucursal" class="form-label">Stock</label>
+            <input type="number" class="form-control" id="inputStockSucursal" name="stockSucursal"
+              #stockSucursal="ngModel" [(ngModel)]="productoSucursalModelPost.stockSucursal">
+          </div>
+
+          <div class="mb-3">
+            <label for="inputIdSucursal" class="form-label">Sucursal</label>
+            <input type="text" class="form-control" id="inputIdSucursal" name="idSucursal" #idSucursal="ngModel"
+              [(ngModel)]="productoSucursalModelPost.idSucursal">
+          </div>
+
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+          (click)="postProductosSucursales()">Agregar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Editar Empresa</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <form>
+      <div class="mb-3">
+        <label for="inputNombreProducto1" class="form-label">Nombre Producto</label>
+        <input type="text" class="form-control" id="inputNombreProducto1" name="nombreProducto1"
+          #nombreProducto1="ngModel" [(ngModel)]="productoModelGetId.nombreProducto">
+      </div>
+      <div class="mb-3">
+        <label for="inputNombreProveedor" class="form-label">Nombre Proveedor</label>
+        <input type="text" class="form-control" id="inputNombreProveedor" name="nombreProveedor"
+          #nombreProveedor="ngModel" [(ngModel)]="productoModelGetId.nombreProveedor">
+      </div>
+      <div class="mb-3">
+        <label for="inputStock" class="form-label">Stock</label>
+        <input type="number" class="form-control" id="inputStock" name="stock" #stock="ngModel"
+          [(ngModel)]="productoModelGetId.stock">
+      </div>
+      <div class="mb-3">
+        <label for="inputIdEmpresa" class="form-label">ID Empresa</label>
+        <input type="text" class="form-control" id="inputIdEmpresa" name="idEmpresa" #idEmpresa="ngModel"
+          [(ngModel)]="productoModelGetId.idEmpresa">
+
+
+      </div>
+
+      <button type="button" class="btn btn-success" (click)="putProductos()" data-bs-dismiss="offcanvas">Editar
+        Producto</button>
+    </form>
+  </div>
+</div>
+
+<div
+  class="footer d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-8 px-5 px-xl-5 bg-danger">
+  <div class="asado text-white mb-3 mb-md-0 ">
+    Copyright © 2022. Todos los Derechos Reservados por el Grupo 1.
+  </div>

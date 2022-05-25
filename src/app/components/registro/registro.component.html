@@ -1,0 +1,216 @@
+<section class="vh-100">
+  <div class="container h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-12 col-xl-11">
+        <div class="card-body p-md-5">
+          <div class="row justify-content-center">
+            <div
+              class="registro col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1"
+            >
+              <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">
+                Registrarse
+              </p>
+
+              <form
+                class="mx-1 mx-md-4"
+                (ngSubmit)="registro()"
+                #registerForm="ngForm"
+              >
+                <div class="d-flex flex-row align-items-center mb-4">
+                  <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                  <div class="form-outline flex-fill mb-0">
+                    <span
+                      *ngIf="!nombre.valid && nombre.touched"
+                      class="requiredField"
+                      >Campo Requerido</span
+                    >
+                    <input
+                      type="text"
+                      id="form3Example1c"
+                      autocomplete="off"
+                      class="form-control"
+                      id="inputNombre"
+                      name="nombre"
+                      #nombre="ngModel"
+                      [(ngModel)]="user.nombre"
+                      required
+                    />
+                    <label class="form-label" for="form3Example1c"
+                      >Ingresa tu nombre</label
+                    >
+                  </div>
+                </div>
+
+                <div class="d-flex flex-row align-items-center mb-4">
+                  <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                  <div class="form-outline flex-fill mb-0">
+                    <span
+                      *ngIf="!email.valid && email.touched"
+                      class="requiredField"
+                      >Campo Requerido</span
+                    >
+                    <input
+                      type="email"
+                      id="form3Example3c"
+                      autocomplete="off"
+                      class="form-control"
+                      id="inputEmail"
+                      name="email"
+                      #email="ngModel"
+                      [(ngModel)]="user.email"
+                      required
+                    />
+                    <label class="form-label" for="form3Example3c"
+                      >Ingresa tu email</label
+                    >
+                  </div>
+                </div>
+
+                <div class="d-flex flex-row align-items-center mb-4">
+                  <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                  <div class="form-outline flex-fill mb-0">
+                    <span
+                      *ngIf="!password.valid && password.touched"
+                      class="requiredField"
+                      >Campo Requerido</span
+                    >
+                    <input
+                      type="password"
+                      id="form3Example4c"
+                      autocomplete="off"
+                      class="form-control"
+                      id="inputPassword"
+                      name="password"
+                      #password="ngModel"
+                      [(ngModel)]="user.password"
+                      required
+                    />
+                    <label class="form-label" for="form3Example4c"
+                      >Contraseña</label
+                    >
+                  </div>
+                </div>
+
+                <div class="d-flex flex-row align-items-center mb-4">
+                  <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                  <div class="form-outline flex-fill mb-0">
+                    <span
+                      *ngIf="!tipoEmpresa.valid && tipoEmpresa.touched"
+                      class="requiredField"
+                      >Campo Requerido</span
+                    >
+                    <select
+                      class="form-select"
+                      aria-label="Default select example"
+                      id="form3Example3c"
+                      id="inputTipoEmpresa"
+                      name="_tipoEmpresa"
+                      #tipoEmpresa="ngModel"
+                      [(ngModel)]="user.tipoEmpresa"
+                      required
+                    >
+                      <option value="Restaurante">Restaurante</option>
+                      <option value="Veterinaria">Veterinaria</option>
+                      <option value="Banco">Banco</option>
+                      <option value="Distribuidora">Distribuidora</option>
+                      <option value="Supermercado">Supermercado</option>
+                      <option value="Técnica">Técnica</option>
+                      <option value="Mécanica Automotriz">
+                        Mécanica Automotriz
+                      </option>
+                      <option value="Electrica">Electrica</option>
+                      <option value="Informática">Informática</option>
+                      <option value="Diseñadora">Diseñadora</option>
+                      <option value="Otro">Otro</option>
+                    </select>
+                    <label class="form-label" for="form3Example3c"
+                      >Tipo de Empresa</label
+                    >
+                  </div>
+                </div>
+
+                <div class="form-check d-flex justify-content-center mb-5">
+                  <input
+                    ngModel
+                    name="terms"
+                    class="form-check-input me-2"
+                    type="checkbox"
+                    for="form2Example3c"
+                    required
+                  />
+                  <label class="form-check-label" for="form2Example3">
+                    Estoy de acuerdo con todos los
+                    <a href="#!">Terminos de Servicio</a>
+                  </label>
+                </div>
+
+                <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                  <button
+                    type="submit"
+                    class="btn btn-danger"
+                    [disabled]="!registerForm.form.valid"
+                  >
+                    Registrarse
+                  </button>
+                </div>
+                <div
+                  class="modal fade"
+                  id="exampleModal"
+                  tabindex="-15"
+                  aria-labelledby="exampleModalLabel"
+                  aria-hidden="true"
+                >
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">
+                          Confirmación de Registro
+                        </h5>
+                        <button
+                          type="button"
+                          class="btn-close"
+                          data-bs-dismiss="modal"
+                          aria-label="Close"
+                        ></button>
+                      </div>
+                      <div class="modal-body">
+                        Se ha registrado exitosamente.
+                      </div>
+                      <div class="modal-footer">
+                        <button
+                          type="button"
+                          class="btn btn-danger"
+                          data-bs-dismiss="modal"
+                          aria-label="Close"
+                          routerLink="/pagina-inicio"
+                        >
+                          Aceptar
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div
+              class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2"
+            >
+              <img
+                src="https://i.ibb.co/0JTjpRb/Registrar.png"
+                class="img-fluid"
+                alt="Sample image"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div
+  class="footer d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-8 px-5 px-xl-5 bg-danger"
+>
+  <div class="asado text-white mb-3 mb-md-0">
+    Copyright © 2022. Todos los Derechos Reservados por el Grupo 1.
+  </div>
+</div>

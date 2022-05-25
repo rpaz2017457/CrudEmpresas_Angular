@@ -1,0 +1,76 @@
+<div class="container">
+  <br>
+  <div class="input-group mb-3">
+    <input [(ngModel)]="search" name="search" type="text" class="form-control" placeholder="Buscar Producto"
+      aria-label="Recipient's username" aria-describedby="basic-addon2">
+    <span class="input-group-text" id="basic-addon2">Buscar</span>
+  </div>
+
+  <br>
+  <br>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID Producto</th>
+        <th scope="col">Nombre Producto</th>
+        <th scope="col">Stock Sucursal</th>
+        <th scope="col">Cantidad Vendida</th>
+        <th scope="col">Eliminar</th>
+        <th scope="col">Vender</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let prod of productoSucursalModelGet | search:search">
+
+      <th scope="row">{{ prod._id }}</th>
+      <td>{{prod.nombreProducto}}</td>
+      <td>{{prod.stockSucursal}}</td>
+      <td>{{prod.cantidadVendida}}</td>
+      <td> <button class="btn" type="button" (click)="deleteProductosSucursales(prod._id)"><img
+            src="https://cdn-icons-png.flaticon.com/512/1214/1214594.png" width="50px" height="50px" class="imagen"
+            alt="..."></button></td>
+
+      <td> <button class="btn" type="button" data-bs-toggle="modal" data-bs-target="#modalAgregarProducto"
+          (click)="getProductosSucursalesId(prod._id)">
+          <img src="https://cdn-icons-png.flaticon.com/512/263/263142.png" width="50px" height="50px" class="imagen"
+            alt="..."></button>
+      </td>
+    </tbody>
+  </table>
+
+</div>
+<div class="modal fade" id="modalAgregarProducto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Agregar Producto</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="inputStock" class="form-label">Cantidad a Vender</label>
+            <input type="text" class="form-control" id="inputStock" name="stockSucursal" #stockSucursal="ngModel"
+              [(ngModel)]="productoSucursalModelGetId.stockSucursal">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+          (click)="putProductosSucursales()">Agregar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<br>
+<div style="display: block;">
+  <canvas baseChart chartType="pie" [data]="chartData" [colors]="chartColors" [labels]="chartLabels"
+    [options]="chartOptions" [plugins]="chartPlugins" [legend]="chartLegend">
+  </canvas>
+</div>
+<div
+  class="footer d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-8 px-5 px-xl-5 bg-danger">
+  <div class="asado text-white mb-3 mb-md-0 ">
+    Copyright © 2022. Todos los Derechos Reservados por el Grupo 1.
+  </div>
