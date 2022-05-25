@@ -1,0 +1,41 @@
+<div class="container rounded bg-white mt-5 mb-5">
+  <div class="row">
+    <div class="col-md-5 border-right">
+      <div class="d-flex flex-column align-items-center text-center p-3 py-"><img class="rounded-circle mt-3"
+          width="215px" src="https://cdn-icons-png.flaticon.com/512/3347/3347776.png"><span
+          class="font-weight-bold">{{user.nombre}}</span><span class="text-black-50">{{user.email}}</span><span> </span>
+      </div>
+    </div>
+    <div class="col-md-5 border-right">
+      <div class="p-3 py-5">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h4 class="text-right">Ajustes de Perfil</h4>
+        </div>
+        <div class="row mt-2">
+          <div class="col-md-6">
+            <label class="labels">Nombre</label>
+            <input [(ngModel)]="user.nombre" name="nombre" type="text" class="form-control" placeholder="PRIMER NOMBRE"
+              value="">
+          </div>
+          <div class="col-md-6">
+            <label class="labels">Correo Electronico</label>
+            <input [(ngModel)]="user.email" name="email" type="text" class="form-control" value=""
+              placeholder="CORREO ELECTRONICO">
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-md-12">
+            <label class="labels">Tipo de Empresa</label>
+            <input [(ngModel)]="user.tipoEmpresa" name="tipoEmpresa" type="text" class="form-control"
+              placeholder="INGRESA TU NUEVA CONTRASEÑA" value="">
+          </div>
+        </div>
+        <div class="mt-5 text-center"><button (click)="updateUser()" class="btn btn-danger profile-button"
+            type="button">Editar Perfil</button></div>
+      </div>
+    </div>
+    <div class="col-md-4">
+
+    </div>
+  </div>
+</div>
