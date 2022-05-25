@@ -1,0 +1,17 @@
+<div class="card text-center m-5" *ngIf="load">
+  <div class="card-header">Sucursal Seleccionada:</div>
+  <img
+    src="https://cdn-icons-png.flaticon.com/512/610/610365.png"
+    class="hola"
+    width="400px"
+    height="400px"
+    alt="Empresas"
+  />
+  <div class="card-body">
+    <h1 class="card-title">{{ sucur.nombreSucursal }}</h1>
+    <p class="card-text">Dirección: {{ sucur.direccionSucursal }}</p>
+    <p class="card-text">Tipo de Empresa: {{ sucur.municipio }}</p>
+    <p class="card-text">Empresa que Pertenece: {{ sucur.idEmpresa }}</p>
+  </div>
+  <div class="card-footer text-muted">ID Sucursal: {{ sucur._id }}</div>
+</div>

@@ -1,0 +1,16 @@
+<div class="card text-center m-5" *ngIf="load">
+  <div class="card-header">Empresa Seleccionada:</div>
+  <img
+    src="https://cdn-icons-png.flaticon.com/512/3061/3061341.png"
+    class="hola"
+    width="400px"
+    height="400px"
+    alt="Empresas"
+  />
+  <div class="card-body">
+    <h1 class="card-title">{{ empres.nombre }}</h1>
+    <p class="card-text">Correo Electrónico: {{ empres.email }}</p>
+    <p class="card-text">Tipo de Empresa: {{ empres.tipoEmpresa }}</p>
+  </div>
+  <div class="card-footer text-muted">ID Empresa: {{ empres._id }}</div>
+</div>
